@@ -1,16 +1,36 @@
 {% extends 'base.html' %}
 <body>
 {% block body_block %}
-    <div class="container"></div>
-    <h3 class='text-center'>Forex world latest articles</h3>
-    <br>
-    <ul>
-        {% for article in articles %}
-            <li>
-                <a href="{{ article.get_absolute_url }}">{{ article.title }}</a>
-            </li>
-        {% endfor %}
-    </ul>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+
+
+                <h3>Forex world latest Articles</h3>
+                <br>
+                <ul>
+                    {% for article in articles %}
+                        <li>
+
+                            <a href="{{ article.get_absolute_url }}">{{ article.title }}</a>
+                            <p><em>Author:{{ article.user.user.username }}</em></p>
+                            {{ comment.article.text }}
+
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        <br>
+            <div class="col">
+               i can whrite ndfhdkslflsdhgslafdh'dsafhls'FLHS
+                fh
+
+                DFAS
+            </div>
+
+        </div>
+
+    </div>
 {% endblock %}
 </body>
 </html>
