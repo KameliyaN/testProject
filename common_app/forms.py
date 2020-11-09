@@ -4,7 +4,8 @@ from common_app.models import Article, Comment
 
 
 class ArticleForm(forms.ModelForm):
-    title = forms.CharField(widget=forms.Textarea())
+    title = forms.CharField(widget=forms.TextInput())
+    content=forms.CharField(widget=forms.Textarea())
 
     class Meta:
         model = Article
