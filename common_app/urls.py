@@ -1,6 +1,8 @@
-from django.urls import path
+from django.urls import path, include
+
+from common_app import views
 
 urlpatterns = [
-    path('', include('django.contrib.auth.urls')),
+    path('', views.articles_list, name='articles')
 
 ]
