@@ -1,0 +1,23 @@
+{% extends 'common_app/base.html' %}
+{% block body_block %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <img style="width:100%"
+                     src=https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTdyG5IscKDXpUFZh3SFgQmIGI6EVCYX9bBMA&usqp=CAU
+                     alt="">
+            </div>
+            <div class="col-lg-6">
+                <form style="border: 1px solid grey; margin: 0% 0%; padding: 10% 5%" method="POST">
+                    <h2>Login</h2>
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-secondary">Login</button>
+                    <br>
+                    {#                    <span>Do not have an account?<a style="color:orange" href="{% url 'signup' %}">Sign up here</a></span>#}
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
