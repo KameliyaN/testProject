@@ -2,8 +2,8 @@
 <body>
 {% block body_block %}
     <div class="container-fluid">
-        <div class="row">
-            <div class="col">
+        <div class="row" >
+            <div class="col-8" >
 
 
                 <h3>Forex world latest Articles</h3>
@@ -20,17 +20,38 @@
                     {% endfor %}
                 </ul>
             </div>
-        <br>
-            <div class="col">
-               i can whrite ndfhdkslflsdhgslafdh'dsafhls'FLHS
-                fh
+            <br>
+            <div class="col" >
 
-                DFAS
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col">Currency</th>
+                        <th scope="col">Current price</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for curr in currencies %}
+                        <tr>
+                            <td class="name">{{ curr.currency }}</td>
+                            <td>
+                                <span class="value">{{ curr.value }}</span>
+                            </td>
+
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
             </div>
+
 
         </div>
 
     </div>
+
+    </div>
+
 {% endblock %}
 </body>
 </html>
