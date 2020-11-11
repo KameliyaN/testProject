@@ -22,24 +22,39 @@
                 <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'login' %}">Log in</a>
+                <a class="nav-link" href="{% url 'login' %}">Placeholder</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Sign up</a>
+                <a class="nav-link" href="{% url 'signup' %}">Placeholder</a>
             </li>
         </ul>
         <span class="navbar-text">
-      Start your forex journey here!
+             {% if user.is_authenticated %}
+                 Hello,{{ user.username }}!
+                 <a class="nav-link" href="{% url 'logout' %}">Log out</a>
+
+             {% else %}
+                 Start your forex journey here!
+                 <ul class="navbar-nav mr-auto">
+                 <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'login' %}">Log in</a>
+                     </li>
+                  <li class="nav-item active">
+                 <a class="nav-link" href="{% url 'signup' %}">Sign up</a>
+                </li>
+                  </ul>
+             {% endif %}
+
     </span>
     </div>
 </nav>
 <div class="progress">
     <div class="container color-white">
         <div class="row" style="text-align: center">
-                <div  style="margin-right:50px" ><h6>LON <small>+1</small></h6></div>
-                <div style="margin-right:50px"><h6>SDNY<small>+10</small></h6></div>
-                <div style="margin-right:50px"><h6>NY <small>-4</small></h6></div>
-                <div style="margin-right:50px"><h6>TYO <small>+9</small></h6></div>
+            <div style="margin-right:50px"><h6>LON <small>+1</small></h6></div>
+            <div style="margin-right:50px"><h6>SDNY<small>+10</small></h6></div>
+            <div style="margin-right:50px"><h6>NY <small>-4</small></h6></div>
+            <div style="margin-right:50px"><h6>TYO <small>+9</small></h6></div>
 
         </div>
 
