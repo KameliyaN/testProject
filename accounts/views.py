@@ -29,4 +29,8 @@ def signup(request):
 class UserDetails(generic.DetailView):
     model = Profile
     template_name = 'accounts/user_profile.html'
-    context_object_name = 'user'
+    context_object_name = 'user_object'
+
+
+def profile_edit(request, pk):
+    pass
