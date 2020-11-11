@@ -29,9 +29,17 @@
             </li>
         </ul>
         <span class="navbar-text">
-             {% if user.is_authenticated %}
+             {% if request.user.is_authenticated %}
                  Hello,{{ user.username }}!
-                 <a class="nav-link" href="{% url 'logout' %}">Log out</a>
+                 <ul class="navbar-nav mr-auto">
+                     <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'logout' %}">Log out</a>
+                 </li>
+                 <li class="navbar-nav mr-auto">
+                      <a class="nav-link" href="{% url 'user-profile' pk=user.id %}">Profile</a>
+                 </li>
+                  </ul>
+
 
              {% else %}
                  Start your forex journey here!

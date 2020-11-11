@@ -1,11 +1,12 @@
-from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import authenticate, login
+
 from django.shortcuts import render, redirect
 
 # Create your views here.
 from django.views import generic
 
 from accounts.forms import SignUpForm
+from accounts.models import Profile
 
 
 def signup(request):
@@ -25,4 +26,7 @@ def signup(request):
     return render(request, 'accounts/signup.html', {'form': form})
 
 
-
+class UserDetails(generic.DetailView):
+    model = Profile
+    template_name = 'accounts/user_profile.html'
+    context_object_name = 'user'
