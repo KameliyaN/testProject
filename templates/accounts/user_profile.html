@@ -1,48 +1,69 @@
 {% extends 'common_app/base.html' %}
 {% block body_block %}
+    <style type="text/css">
+        #user_pic {
+            height: 200px;
+            width: 200px;
+            border-radius: 50%;
+            border: 5px solid #888;
+            margin: 0 auto;
+            object-fit: cover;
+        }
 
-    {#    <h1>Do you want to <a href="">edit</a> your profile?</h1>#}
-    <div class="container">
+        #user-info-box {
+            text-align: center;
+        }
+    </style>
+    <div class="main-container">
+        <br>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card card-body" id="user-info-box">
+                    <img id="user_pic" src="{{ profile.picture.url }}" alt="Profile pic!">
+                    <br>
+                    <h2>{{ profile }}</h2>
+                    <p>Email: {{ profile.email }}</p>
+                    <hr>
+                    <p>{{ profile.first_name }} {{ profile.last_name }}</p>
+                    <hr>
 
-        <h1><em>Profile Details</em></h1>
-        <div class="items-container">
-            <div >
-                <h2>{{ user.first_name }}</h2>
-                <h2>{{ user.last_name }}</h2>
-                <h2>{{ user.username }}</h2>
 
-                <h2>{{ user.email }}</h2>
-
-                <div class="buttons-container">
-                    <a class="button edit" href="">Edit</a>
-                    <a class="button delete" href="">Delete</a>
+                    <a class="btn btn-secondary" href="{% url 'edit-profile' %}">Edit Profile</a>
                 </div>
             </div>
+            {#            <div class="col-md-8">#}
+            {#                <div class="card card-body">#}
+            {#                    <h3>My Orders:</h3>#}
+            {#                    <hr>#}
+            {#                    <table class="table">#}
+            {#                        <thead class="thead-dark">#}
+            {#                        <tr>#}
+            {#                            <th>Transaction ID</th>#}
+            {#                            <th>Date</th>#}
+            {#                            <th>Items</th>#}
+            {#                            <th>Total</th>#}
+            {#                            <th></th>#}
+            {#                        </tr>#}
+            {#                        </thead>#}
+            {#                        <tr>#}
+            {#                            <td>122523462</td>#}
+            {#                            <td>11-24-2020</td>#}
+            {#                            <td>2</td>#}
+            {#                            <td>$12.18</td>#}
+            {#                            <td><a class="btn btn-dark btn-sm" href="">View Order</a></td>#}
+            {#                        </tr>#}
+            {##}
+            {#                        <tr>#}
+            {#                            <td>122523123</td>#}
+            {#                            <td>11-29-2020</td>#}
+            {#                            <td>7</td>#}
+            {#                            <td>$53.65</td>#}
+            {#                            <td><a class="btn btn-dark btn-sm" href="">View Order</a></td>#}
+            {#                        </tr>#}
+            {#                    </table>#}
+            {#                </div>#}
         </div>
-
+    </div>
     </div>
 
-{#    <h5>or...</h5>#}
-{##}
-{#    <div class="row" style="margin-top:10%">#}
-{#        <div class="col-lg-6 text-center">#}
-{#            <img class="rounded-circle" src="https://www.dcu.ie/sites/default/files/iss/images/Icons_V2-01.png"#}
-{#                 alt="Generic placeholder image" width="140" height="140">#}
-{#            <h2>Change password</h2>#}
-{#            <p><a class="btn btn-secondary" href="{% url 'password_change' %}" role="button">View details &raquo;</a>#}
-{#            </p>#}
-{#        </div><!-- /.col-lg-4 -->#}
-{#        <div class="col-lg-6 text-center">#}
-{#            <img class="rounded-circle"#}
-{#                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnhLedyw4Kh3wkzJD0ytWGHTQF01pqJ0N5l8CO9n4MmZoxF71rmQ"#}
-{#                 alt="Generic placeholder image" width="140" height="140">#}
-{#            <h2>Reset password</h2>#}
-{#            <p><a class="btn btn-secondary" href="{% url 'password_reset' %}" role="button">View details &raquo;</a></p>#}
-{#        </div><!-- /.col-lg-4 -->#}
-{#    </div><!-- /.row -->#}
-{#    <div class="row">#}
-{#        <div class="col-lg-12 text-center">#}
-{#            <h3><a href="{% url 'logout' %}">Logout</a></h3>#}
-{#        </div>#}
-{#    </div>#}
 {% endblock %}
