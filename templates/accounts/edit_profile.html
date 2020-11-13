@@ -6,7 +6,9 @@
         <h2>Edit profile</h2>
         {{ form|crispy }}
 
-        <button type="submit" class="btn btn-secondary">Edit</button>
+        <button type="submit" class="btn btn-secondary">Edit profile</button>
+        <a class="btn btn-secondary" href="{% url 'password_change' %}">Change password</a>
+
 
 
     </form>
