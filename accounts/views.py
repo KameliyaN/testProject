@@ -44,13 +44,10 @@ def profile_edit(request):
     form = ProfileForm(instance=profile)
 
     if request.method == 'POST':
-        user_form = UserForm(request.POST, instance=user)
-        if user_form.is_valid():
-            user_form.save()
-
         form = ProfileForm(request.POST, request.FILES, instance=profile)
-
-        if form.is_valid():
+        user_form = UserForm(request.POST, instance=user)
+        if user_form.is_valid() and form.is_valid():
+            user_form.save()
             form.save()
             return redirect('user-profile')
 
