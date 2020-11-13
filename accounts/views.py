@@ -48,6 +48,7 @@ def profile_edit(request):
             user_form.save()
 
         form = ProfileForm(request.POST, request.FILES, instance=profile)
+
         if form.is_valid():
             form.save()
             return redirect('user-profile')

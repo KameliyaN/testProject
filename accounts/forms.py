@@ -6,7 +6,7 @@ from accounts.models import Profile
 
 
 class SignUpForm(UserCreationForm):
-    # picture = forms.ImageField()
+
 
     class Meta:
         model = User
