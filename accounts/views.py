@@ -28,6 +28,7 @@ def signup(request):
     return render(request, 'accounts/signup.html', {'form': form})
 
 
+@login_required(login_url="home")
 def profile(request):
     profile = request.user.profile
 
@@ -56,3 +57,24 @@ def profile_edit(request):
     context = {'form': form,
                }
     return render(request, 'accounts/edit_profile.html', context)
+
+
+@login_required(login_url="home")
+def profile_delete(request):
+    user = request.user
+    profile = user.profile
+    form = ProfileForm(instance=profile)
+    user_form = UserForm(instance=user)
+
+    form.fields['username'].disabled = True
+    form.fields['first_name'].disabled = True
+    form.fields['last_name'].disabled = True
+    form.fields['email'].disabled = True
+    form.fields['picture'].disabled = True
+    if request.method == 'POST':
+        profile.delete()
+        user.delete()
+        return redirect('home')
+    context = {'form': form,
+               }
+    return render(request, 'accounts/delete_profile.html', context)

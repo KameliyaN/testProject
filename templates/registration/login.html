@@ -4,24 +4,19 @@
 {% block body_block %}
 
     <div class="container">
-        <div class="row">
-            <div class="col-lg-6">
-{#                <img style="width:100%"#}
-{#                     src=https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTdyG5IscKDXpUFZh3SFgQmIGI6EVCYX9bBMA&usqp=CAU#}
-{#                     alt="">#}
-            </div>
-            <div class="col-lg-8">
-                <form method="POST">
-                    <h2>Login</h2>
-                    {% csrf_token %}
-                    {{ form|crispy }}
-                    <button type="submit" class="btn btn-secondary" >Login</button>
-                    <br>
-                    <br>
-                    <span>Don`t have an account?<a style="color:red"
-                                                   href="{% url 'signup' %}">Sign up here</a></span>
-                </form>
-            </div>
+
+        <div class="col-lg-8">
+            <form method="POST">
+                <h2>Login</h2>
+                {% csrf_token %}
+                {{ form|crispy }}
+                <button type="submit" class="btn btn-secondary">Login</button>
+                <br>
+                <br>
+                <span>Don`t have an account?<a style="color:red"
+                                               href="{% url 'signup' %}">Sign up here</a></span>
+            </form>
         </div>
+
     </div>
 {% endblock %}

@@ -1,24 +1,13 @@
 {% extends 'common_app/base.html' %}
 {% load static %}
 {% block body_block %}
-    <style type="text/css">
-        #user_pic {
-            height: 200px;
-            width: 200px;
-            border-radius: 50%;
-            border: 5px solid #888;
-            margin: 0 auto;
-            object-fit: cover;
-        }
+    <link rel="stylesheet" href="{% static 'accounts/css/profile_pic.css' %}"/>
 
-        #user-info-box {
-            text-align: center;
-        }
-    </style>
+
     <div class="main-container">
-        <br>
+
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-5">
                 <div class="card card-body" id="user-info-box">
                     {% if  profile.picture %}
                         <img id="user_pic" src="{{ profile.picture.url }}" alt="">
@@ -36,7 +25,7 @@
 
                     <a class="btn btn-secondary" href="{% url 'edit-profile' %}">Edit Profile</a>
                     <br>
-                    <a class="btn btn-danger" href="">Delete Profile</a>
+                    <a class="btn btn-danger" href="{% url 'delete-profile' %}">Delete Profile</a>
                 </div>
             </div>
             {#            <div class="col-md-8">#}
