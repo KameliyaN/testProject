@@ -26,5 +26,5 @@ def update_profile(sender, instance, created, **kwargs):
         print("Profile updated!")
 
 
-post_save.connect(create_profile, sender=User,weak=False)
-post_save.connect(update_profile, sender=User,weak=False)
+post_save.connect(create_profile, sender=User, weak=False)
+post_save.connect(update_profile, sender=User, weak=False)
