@@ -97,3 +97,6 @@ def change_password(request):
 @login_required(login_url="home")
 def change_password_done(request):
     return render(request, 'accounts/change_password_done.html', {})
+
+
+
