@@ -7,6 +7,7 @@ class ArticleForm(forms.ModelForm):
     title = forms.CharField(widget=forms.TextInput())
     content = forms.CharField(widget=forms.Textarea())
 
+
     class Meta:
         model = Article
         exclude = ('user',)

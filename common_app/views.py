@@ -1,3 +1,5 @@
+from datetime import date
+
 import requests
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -49,3 +51,5 @@ class ArticleDetailView(LoginRequiredMixin, DetailView):
     model = Article
     context_object_name = 'article'
     template_name = "common_app/view_article.html"
+
+
