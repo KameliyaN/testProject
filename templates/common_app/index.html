@@ -1,55 +1,58 @@
 {% extends 'common_app/base.html' %}
+{% load static %}
 
 {% block body_block %}
-{#    <div class="container-fluid">#}
-{#        <div class="row" >#}
-{#            <div class="col-8" >#}
+      <link rel="stylesheet" href="{% static 'accounts/css/profile_pic.css' %}"/>
+{#        <div class="container-fluid">#}
+{#            <div class="row" >#}
+{#                <div class="col-8" >#}
 
 
-                <h3><em>Forex world latest Articles</em></h3>
-                <br>
-                <ul>
-                    {% for article in articles %}
-                        <li>
-
-                            <a href="{{ article.get_absolute_url }}">{{ article.title }}</a>
-                            <p><em>Author:{{ article.user.user.username }}</em></p>
-                            {{ comment.article.text }}
-
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
-            <br>
-            <div class="col" >
-
-                <table class="table table-hover">
-                    <thead>
-                    <tr>
-                        <th scope="col">Currency</th>
-                        <th scope="col">Current price</th>
-
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for curr in currencies %}
-                        <tr>
-                            <td class="name">{{ curr.currency }}</td>
-                            <td>
-                                <span class="value">{{ curr.value }}</span>
-                            </td>
-
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-            </div>
+    <h3><em>Forex world latest Articles</em></h3>
+    <br>
 
 
-{#        </div>#}
-{##}
-{#    </div>#}
-{##}
-{#    </div>#}
+    {% for article in articles %}
+        <br>
+        <div id="dashes-div">
+        <p><em><strong>Title:</strong></em> {{ article.title }}</p>
+        <p><em><strong>Author:</strong>{{ article.user.username }}</em></p>
+        <a href="{% url 'view article' article.pk %}">View more</a>
+        </div>
+        <hr>
+    {% endfor %}
+
+    </div>
+    <br>
+    <div class="col">
+
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">Currency</th>
+                <th scope="col">Current price</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for curr in currencies %}
+                <tr>
+                    <td class="name">{{ curr.currency }}</td>
+                    <td>
+                        <span class="value">{{ curr.value }}</span>
+                    </td>
+
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+    {#        </div>#}
+    {##}
+    {#    </div>#}
+    {##}
+    {#    </div>#}
 
 {% endblock %}
