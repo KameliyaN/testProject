@@ -78,7 +78,7 @@ class ProfileForm(forms.ModelForm):
         return last_name
 
 
-class DisabledFormMixin():
+class DisabledFormMixin:
     def __init__(self):
         for (_, field) in self.fields.items():
             field.widget.attrs['disabled'] = True
