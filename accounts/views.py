@@ -8,7 +8,7 @@ from django.shortcuts import render, redirect
 # Create your views here.
 from django.views import generic
 
-from accounts.forms import SignUpForm, ProfileForm, UserForm
+from accounts.forms import SignUpForm, ProfileForm, UserForm, DeleteProfileForm
 from accounts.models import Profile
 
 
@@ -61,14 +61,9 @@ def profile_edit(request):
 def profile_delete(request):
     user = request.user
     profile = user.profile
-    form = ProfileForm(instance=profile)
+    form = DeleteProfileForm(instance=profile)
     user_form = UserForm(instance=user)
 
-    form.fields['username'].disabled = True
-    form.fields['first_name'].disabled = True
-    form.fields['last_name'].disabled = True
-    form.fields['email'].disabled = True
-    form.fields['picture'].disabled = True
     if request.method == 'POST':
         profile.delete()
         user.delete()
