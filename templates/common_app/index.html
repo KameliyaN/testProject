@@ -8,7 +8,7 @@
     {#                <div class="col-8" >#}
 
     <blockquote class="blockquote text-center">
-        <h3 class="mb-0"><em>Forex world latest articles</em> </h3>
+        <h3 class="mb-0"><em>Forex world latest articles</em></h3>
 
     </blockquote>
 
@@ -16,7 +16,7 @@
 
 
     {% for article in articles reversed %}
-        <br>
+                <br>
         <div id="dashes-div">
 
             <blockquote class="blockquote text-center">
@@ -24,8 +24,9 @@
                 <footer class="blockquote-footer"><em>Author:{{ article.user.username }},</em>
                     <cite title="date">{{ article.date }}</cite></footer>
             </blockquote>
-
-            <a class="form-row" href="{% url 'view article' article.pk %}">View more</a>
+            <p align="center">
+                <a href="{% url 'view article' article.pk %}">View more</a>
+            </p>
         </div>
         <hr>
     {% endfor %}
