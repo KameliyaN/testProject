@@ -45,6 +45,13 @@ class SignUpForm(UserCreationForm):
         return last_name
 
 
+class LoginForm(AuthenticationForm):
+    class Meta:
+        model = User
+
+    fields = ('username', 'password1')
+
+
 class UserForm(forms.ModelForm):
     class Meta:
         model = User
