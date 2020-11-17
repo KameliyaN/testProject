@@ -2,14 +2,62 @@
 {% load static %}
 {% load crispy_forms_filters %}
 {% block body_block %}
-    <link rel="stylesheet" href="{% static 'accounts/css/small_pic.css' %}"/>
-    <h3></h3>
-    {% if  article.user.picture %}
-        <img id="small_pic" src="{{ article.user.picture.url }}" alt="">
-    {% else %}
-        <img id="small_pic" src="{% static 'accounts/images/default_user.png' %}" alt="">
-    {% endif %}
-    {{ article.title }}
-    {{ article.content }}
+        <link rel="stylesheet" href="{% static 'accounts/css/circle_pic.css' %}"/>
+    {#    <h3></h3>#}
+    {#    {% if  article.user.picture %}#}
+    {#        <img id="small_pic" src="{{ article.user.picture.url }}" alt="">#}
+    {#    {% else %}#}
+    {#        <img id="small_pic" src="{% static 'accounts/images/default_user.png' %}" alt="">#}
+    {#    {% endif %}#}
+    {#    {{ article.user.first_name }}#}
+    {#    {{ article.title }}#}
+    {#    {{ article.content }}#}
+    <!-- News jumbotron -->
+    <div class="jumbotron text-center hoverable p-4">
 
+        <!-- Grid row -->
+        <div class="row">
+
+            <!-- Grid column -->
+            <div class="col-md-4 offset-md-1 mx-3 my-3">
+
+                <!-- Featured image -->
+                <div class="view overlay">
+                    {% if  article.user.picture %}
+                        <img id="circle_pic" src="{{ article.user.picture.url }}" alt="">
+                    {% else %}
+                        <img id="small_pic" src="{% static 'accounts/images/default_user.png' %}" alt="">
+                    {% endif %}
+
+
+                </div>
+
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-md-7 text-md-left ml-3 mt-3">
+
+                <!-- Excerpt -->
+                <a href="#" class="green-text">
+                    <h6 class="h6 pb-1"><i class="fas fa-desktop pr-1"></i> More autor`s articles</h6>
+                </a>
+
+                <h4 class="h4 mb-4">{{ article.title}}</h4>
+
+                <p class="font-weight-normal">{{ article.content }}</p>
+                <p class="font-weight-normal">by <a><strong>{{ article.user.first_name}} {{article.user.last_name  }}</strong></a>, {{ article.date }}</p>
+
+                <a class="btn btn-success" href="{% url 'edit article' article.pk %}">Edit article</a>
+                <a class="btn btn-danger">Delete article</a>
+                <a class="btn btn-secondary">Comment</a>
+
+            </div>
+            <!-- Grid column -->
+
+        </div>
+        <!-- Grid row -->
+
+    </div>
+    <!-- News jumbotron -->
 {% endblock %}

@@ -13,23 +13,27 @@
     </blockquote>
 
 
+    {% if articles %}
 
+        {% for article in articles reversed %}
+            <br>
+            <div id="dashes-div">
 
-    {% for article in articles reversed %}
-                <br>
-        <div id="dashes-div">
+                <blockquote class="blockquote text-center">
+                    <p class="mb-0">{{ article.title }}</p>
+                    <footer class="blockquote-footer"><em>Author:{{ article.user.username }},</em>
+                        <cite title="date">{{ article.date }}</cite></footer>
+                </blockquote>
+                <p align="center">
+                    <a href="{% url 'view article' article.pk %}">View more</a>
+                </p>
+            </div>
+            <hr>
+        {% endfor %}
+    {% else %}
+        <h3 class="mb-0"><em>There are no articles at the moment! Be the first to add one!</em></h3>
 
-            <blockquote class="blockquote text-center">
-                <p class="mb-0">{{ article.title }}</p>
-                <footer class="blockquote-footer"><em>Author:{{ article.user.username }},</em>
-                    <cite title="date">{{ article.date }}</cite></footer>
-            </blockquote>
-            <p align="center">
-                <a href="{% url 'view article' article.pk %}">View more</a>
-            </p>
-        </div>
-        <hr>
-    {% endfor %}
+    {% endif %}
 
     </div>
     <br>

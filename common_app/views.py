@@ -7,10 +7,13 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 
 # Create your views here.
+from django.urls import reverse_lazy
+from django.utils.decorators import method_decorator
 
-from django.views.generic import CreateView, DetailView
+from django.views.generic import CreateView, DetailView, UpdateView
 
 from accounts.models import Profile
+from common_app.decorators import user_is_article_author
 from common_app.forms import ArticleForm
 from common_app.models import Article
 
@@ -37,7 +40,7 @@ def homepage(request):
 class CreateArticleView(LoginRequiredMixin, CreateView):
     model = Article
     form_class = ArticleForm
-    template_name = "common_app/write_article.html"
+    template_name = "common_app/create_article.html"
 
     def form_valid(self, form):
         article = form.save(commit=False)
@@ -53,3 +56,14 @@ class ArticleDetailView(LoginRequiredMixin, DetailView):
     template_name = "common_app/view_article.html"
 
 
+@method_decorator(user_is_article_author, name='dispatch')
+class ArticleUpdateView(LoginRequiredMixin, UpdateView):
+    model = Article
+    form_class = ArticleForm
+    template_name = "common_app/edit_article.html"
+
+    def form_valid(self, form):
+        article = form.save(commit=False)
+        article.user = self.request.user.profile
+        article.save()
+        return redirect('view article', article.id)
