@@ -1,15 +1,10 @@
 from django.contrib.auth import authenticate, login, update_session_auth_hash, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
-from django.contrib.auth.models import User
 
 from django.shortcuts import render, redirect
 
-# Create your views here.
-from django.views import generic
-
 from accounts.forms import SignUpForm, ProfileForm, UserForm, DeleteProfileForm, LoginForm
-from accounts.models import Profile
 
 
 def signup(request):
@@ -19,7 +14,6 @@ def signup(request):
         if form.is_valid():
             user = form.save()
             user.save()
-
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
@@ -56,7 +50,7 @@ def profile(request):
     return render(request, 'accounts/user_profile.html', context)
 
 
-@login_required(login_url="home")
+@login_required(login_url="login")
 def profile_edit(request):
     user = request.user
     profile = user.profile
@@ -75,12 +69,11 @@ def profile_edit(request):
     return render(request, 'accounts/edit_profile.html', context)
 
 
-@login_required(login_url="home")
+@login_required(login_url="login")
 def profile_delete(request):
     user = request.user
     profile = user.profile
     form = DeleteProfileForm(instance=profile)
-    user_form = UserForm(instance=user)
 
     if request.method == 'POST':
         profile.delete()
@@ -91,7 +84,7 @@ def profile_delete(request):
     return render(request, 'accounts/delete_profile.html', context)
 
 
-@login_required(login_url="home")
+@login_required(login_url="login")
 def change_password(request):
     if request.method == 'POST':
         form = PasswordChangeForm(request.user, request.POST)
@@ -107,6 +100,6 @@ def change_password(request):
         'form': form})
 
 
-@login_required(login_url="home")
+@login_required(login_url="login")
 def change_password_done(request):
     return render(request, 'accounts/change_password_done.html', {})
