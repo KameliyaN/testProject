@@ -49,7 +49,7 @@
                 <p class="font-weight-normal">by <a><strong>{{ article.user.first_name}} {{article.user.last_name  }}</strong></a>, {{ article.date }}</p>
 
                 <a class="btn btn-success" href="{% url 'edit article' article.pk %}">Edit article</a>
-                <a class="btn btn-danger">Delete article</a>
+                <a class="btn btn-danger" href="{% url 'delete article' article.pk %}">Delete article</a>
                 <a class="btn btn-secondary">Comment</a>
 
             </div>

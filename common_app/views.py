@@ -10,10 +10,11 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 
-from django.views.generic import CreateView, DetailView, UpdateView
+from django.views.generic import CreateView, DetailView, UpdateView, DeleteView, ListView
+from django.views.generic.detail import BaseDetailView
 
 from accounts.models import Profile
-from common_app.decorators import user_is_article_author
+from common_app.decorators import user_is_article_author_or_admin
 from common_app.forms import ArticleForm
 from common_app.models import Article
 
@@ -40,7 +41,7 @@ def homepage(request):
 class CreateArticleView(LoginRequiredMixin, CreateView):
     model = Article
     form_class = ArticleForm
-    template_name = "common_app/create_article.html"
+    template_name = "common_app/article_create.html"
 
     def form_valid(self, form):
         article = form.save(commit=False)
@@ -53,17 +54,27 @@ class CreateArticleView(LoginRequiredMixin, CreateView):
 class ArticleDetailView(LoginRequiredMixin, DetailView):
     model = Article
     context_object_name = 'article'
-    template_name = "common_app/view_article.html"
+    template_name = "common_app/article_view.html"
 
 
-@method_decorator(user_is_article_author, name='dispatch')
+@method_decorator(user_is_article_author_or_admin, name='dispatch')
 class ArticleUpdateView(LoginRequiredMixin, UpdateView):
     model = Article
     form_class = ArticleForm
-    template_name = "common_app/edit_article.html"
+    template_name = "common_app/article_edit.html"
 
     def form_valid(self, form):
         article = form.save(commit=False)
-        article.user = self.request.user.profile
         article.save()
         return redirect('view article', article.id)
+
+
+@method_decorator(user_is_article_author_or_admin, name='dispatch')
+class ArticleDeleteView(LoginRequiredMixin, DeleteView):
+    model = Article
+    success_url = reverse_lazy('home')
+    context_object_name = 'article'
+
+
+class AllArticlesUserView(LoginRequiredMixin, ListView):
+    pass
