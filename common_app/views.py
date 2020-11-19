@@ -77,7 +77,7 @@ class ArticleDeleteView(LoginRequiredMixin, DeleteView):
     context_object_name = 'article'
 
 
-class ArticlesUserAllView(LoginRequiredMixin, ListView, BaseListView):
+class ArticlesUserAllView(LoginRequiredMixin, ListView):
     model = Article
     context_object_name = 'articles'
     template_name = "common_app/view_all_user_articles.html"
