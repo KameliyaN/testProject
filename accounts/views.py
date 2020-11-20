@@ -8,19 +8,25 @@ from django.shortcuts import render, redirect
 from accounts.forms import SignUpForm, ProfileForm, UserForm, DeleteProfileForm, LoginForm
 
 
+def get_redirect_url(params):
+    redirect_url = params.get('return_url')
+    print(redirect_url)
+    return redirect_url if redirect_url else 'home'
+
+
 def signup(request):
     form = SignUpForm()
     if request.method == 'POST':
         form = SignUpForm(request.POST, request.FILES)
+        return_url = get_redirect_url(request.POST)
         if form.is_valid():
             user = form.save()
             user.save()
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
-
             login(request, user)
-            return redirect('home')
+            return redirect(return_url)
 
     return render(request, 'accounts/signup.html', {'form': form})
 
@@ -28,6 +34,7 @@ def signup(request):
 def login_view(request):
     form = LoginForm()
     if request.method == 'POST':
+
         form = LoginForm(request.POST)
         if form.is_valid():
             username = form.cleaned_data['username']
@@ -39,12 +46,13 @@ def login_view(request):
     return render(request, 'registration/login.html', {'form': form})
 
 
+@login_required
 def logout_view(request):
     logout(request)
     return redirect('home')
 
 
-@login_required(login_url="login")
+@login_required
 def profile(request):
     profile = request.user.profile
 
@@ -53,7 +61,7 @@ def profile(request):
     return render(request, 'accounts/user_profile.html', context)
 
 
-@login_required(login_url="login")
+@login_required
 def profile_edit(request):
     user = request.user
     profile = user.profile
@@ -72,7 +80,7 @@ def profile_edit(request):
     return render(request, 'accounts/edit_profile.html', context)
 
 
-@login_required(login_url="login")
+@login_required
 def profile_delete(request):
     user = request.user
     profile = user.profile
@@ -87,7 +95,7 @@ def profile_delete(request):
     return render(request, 'accounts/delete_profile.html', context)
 
 
-@login_required(login_url="login")
+@login_required
 def change_password(request):
     if request.method == 'POST':
         form = PasswordChangeForm(request.user, request.POST)
@@ -103,6 +111,6 @@ def change_password(request):
         'form': form})
 
 
-@login_required(login_url="login")
+@login_required
 def change_password_done(request):
     return render(request, 'accounts/change_password_done.html', {})

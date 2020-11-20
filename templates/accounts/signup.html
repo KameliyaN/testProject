@@ -3,6 +3,7 @@
 
 {% block body_block %}
     <form method="post">
+     <input type="hidden" name="return_url" value="{{ request.GET.next }}"/>
         {% csrf_token %}
         <h2>Sign up</h2>
         <div class="form-row">
@@ -28,6 +29,7 @@
 
         <button type="submit" class="btn btn-secondary">Sign in</button>
 
-        <span>Have an account?<a href="{% url 'login' %}" style="color:red">Log in here</a></span>
+
+        <span>Have an account?<a href="{% url 'login' %}?next={{ request.GET.next }}" style="color:red">Log in here</a></span>
     </form>
 {% endblock %}
